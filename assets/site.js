@@ -58,4 +58,37 @@
       palette.appendChild(button);
     });
   });
+  const menuButton = document.querySelector('.menu-toggle');
+  const navigation = document.querySelector('.nav-links');
+
+  if (menuButton && navigation) {
+    function closeMenu() {
+      navigation.classList.remove('open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.textContent = 'Menu';
+    }
+
+    menuButton.addEventListener('click', () => {
+      const open = navigation.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.textContent = open ? 'Fermer' : 'Menu';
+    });
+
+    navigation.addEventListener('click', (event) => {
+      if (event.target.closest('a')) closeMenu();
+    });
+
+    document.addEventListener('click', (event) => {
+      if (navigation.classList.contains('open') && !event.target.closest('nav')) closeMenu();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeMenu();
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 640) closeMenu();
+    });
+  }
+
 })();

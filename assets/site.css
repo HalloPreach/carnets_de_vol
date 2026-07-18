@@ -75,6 +75,18 @@ nav {
 .nav-links { display: flex; gap: 1.5rem; list-style: none; }
 .nav-links a { text-decoration: none; font-size: .92rem; font-weight: 500; color: var(--ink-soft); }
 .nav-links a:hover { color: var(--ink); }
+.menu-toggle {
+  display: none;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  padding: .42rem .8rem;
+  font: 600 .78rem 'Space Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  cursor: pointer;
+}
 .back { text-decoration: none; font-size: .9rem; font-weight: 600; color: var(--ink-soft); }
 .back:hover { color: var(--ink); }
 
@@ -581,7 +593,47 @@ nav {
 @media (max-width: 800px) { .about { grid-template-columns: 1fr; } }
 @media (max-width: 760px) { .filmstrip { grid-template-columns: 1fr; } }
 @media (max-width: 700px) { .post { margin-top: 0 !important; } }
-@media (max-width: 640px) { .nav-links { display: none; } }
+@media (max-width: 640px) {
+  .home-page .nav-inner { position: relative; }
+  .menu-toggle { display: block; }
+  .home-page .nav-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    padding: .35rem 0;
+    background: color-mix(in srgb, var(--paper) 97%, transparent);
+    border: 1px solid var(--line);
+    border-top: 0;
+    box-shadow: 0 12px 24px rgba(30, 25, 15, .12);
+  }
+  .home-page .nav-links.open { display: flex; }
+  .home-page .nav-links li + li { border-top: 1px dashed var(--line); }
+  .home-page .nav-links a {
+    display: block;
+    padding: .8rem 1rem;
+    color: var(--ink);
+  }
+}
+@media (max-width: 520px) {
+  .home-page h1 .strike {
+    white-space: normal;
+    text-decoration-line: line-through;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 4px;
+    text-decoration-skip-ink: none;
+  }
+  .home-page h1 .strike::after { display: none; }
+}
+@media (max-width: 420px) {
+  .home-page h1 {
+    max-width: none;
+    font-size: clamp(2.15rem, 11vw, 2.8rem);
+  }
+}
 @media (max-width: 560px) { .logbook ul { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
