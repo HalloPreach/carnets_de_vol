@@ -380,7 +380,7 @@
         <path d="M0 6 Q 12 1, 25 6 T 50 6 T 75 6 T 100 6 T 125 6 T 150 6 T 175 6 T 200 6" stroke="#E4572E" stroke-width="3" fill="none" stroke-linecap="round"/>
       </svg>
     </h2>
-    <br><span class="sec-note">3 carnets pour l'instant - tous vécus, zéro invention. les pastilles de couleur se copient en un clic</span>
+    <br><span class="sec-note">4 carnets - tous vécus, zéro invention. les pastilles de couleur se copient en un clic</span>
     <div class="posts" id="posts"></div>
   </div>
 </section>
@@ -518,6 +518,21 @@ const posts=[
     ],
     fallback:null,
     palette:["#43575E","#5276AD","#759ACC","#B4D1ED"]
+  },
+  {
+    title:"Chez moi, en campagne (oui, ça compte)",
+    excerpt:"Là où tout a commencé : les champs derrière la maison, l'étang, les arbres nus de décembre. Mon terrain d'entraînement, celui où je teste tout avant de partir loin - et qui n'a rien à envier au reste.",
+    note:"le premier décollage de tous, c'était ici",
+    date:"27 décembre", read:"5 min",
+    url:"chez-moi.html",
+    meta:"CHEZ MOI · CAMPAGNE · COUCHER À 16:37",
+    img:"media/chez-moi.jpeg",
+    clips:[
+      {src:"media/chez-moi-matin-1110.mp4",poster:"media/posters/chez-moi-matin-1110.jpg",cap:"LE MATIN · 11:10"},
+      {src:"media/chez-moi-soir-1625.mp4",poster:"media/posters/chez-moi-soir-1625.jpg",cap:"L'HEURE DORÉE · 16:25"}
+    ],
+    fallback:null,
+    palette:["#362F1C","#6E573B","#E5CEA7","#799ABF"]
   }
 ];
 
@@ -599,7 +614,7 @@ posts.forEach(p=>{
 /* ---------- Destinations : étiquettes bagage ---------- */
 const destinations=[
   ["Zermatt · le Cervin","#586E8B"],["Auvergne · chaîne des Puys","#5D5E36"],
-  ["Annecy · le lac","#5276AD"],["chez moi (ça compte ?)","#6B675E"]
+  ["Annecy · le lac","#5276AD"],["chez moi (oui, ça compte)","#E5CEA7"]
 ];
 const destBox=document.getElementById('destinations');
 destinations.forEach(([name,color])=>{
