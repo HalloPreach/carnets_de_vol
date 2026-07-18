@@ -7,265 +7,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --paper:#F5F3EC;
-    --ink:#1C1B1A;
-    --ink-soft:#6B675E;
-    --line:#DDD8CC;
-    --card:#FFFDF8;
-    --accent:#E4572E;
-    --blue:#2547D0;
-    --maxw:1120px;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    background:var(--paper);color:var(--ink);
-    font-family:'Instrument Sans',system-ui,sans-serif;
-    font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  /* grain papier */
-  body::before{
-    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.03 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-  ::selection{background:var(--ink);color:var(--paper)}
-  a{color:inherit}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:2}
-  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
-
-  .hand{font-family:'Caveat',cursive;font-weight:600}
-  .mono{font-family:'Space Mono',monospace}
-
-  /* ---------- morceaux de scotch ---------- */
-  .tape{
-    position:absolute;width:90px;height:26px;
-    background:rgba(230,220,180,.55);
-    box-shadow:0 1px 3px rgba(0,0,0,.08);
-    backdrop-filter:blur(1px);
-  }
-
-  /* ---------- Nav ---------- */
-  nav{
-    position:sticky;top:0;z-index:50;
-    background:color-mix(in srgb, var(--paper) 90%, transparent);
-    backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
-  }
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:62px}
-  .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.02rem;text-decoration:none;display:flex;align-items:center;gap:.5rem}
-  .logo .dot{width:13px;height:13px;border-radius:50%;background:var(--accent)}
-  .nav-links{display:flex;gap:1.5rem;list-style:none}
-  .nav-links a{text-decoration:none;font-size:.92rem;font-weight:500;color:var(--ink-soft)}
-  .nav-links a:hover{color:var(--ink)}
-  @media(max-width:640px){.nav-links{display:none}}
-
-  /* ---------- Hero ---------- */
-  header{padding:5.5rem 0 4rem;position:relative}
-  .eyebrow{font-family:'Space Mono',monospace;font-size:.76rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-soft)}
-  h1{
-    font-family:'Syne',sans-serif;font-weight:800;
-    font-size:clamp(2.5rem,6.8vw,4.8rem);line-height:1.04;letter-spacing:-.025em;
-    margin:1rem 0 1.2rem;max-width:15ch;
-  }
-  h1 .strike{position:relative;white-space:nowrap}
-  h1 .strike::after{
-    content:"";position:absolute;left:-2%;right:-2%;top:54%;height:4px;
-    background:var(--accent);transform:rotate(-2deg);border-radius:2px;
-  }
-  h1 .hl{
-    background:linear-gradient(transparent 58%, rgba(242,193,78,.75) 58%);
-    padding:0 .1em;
-  }
-  .hero-hand{
-    font-family:'Caveat',cursive;font-weight:600;font-size:1.55rem;color:var(--blue);
-    transform:rotate(-1.5deg);display:inline-block;margin-top:.2rem;
-  }
-  .lede{max-width:34rem;color:var(--ink-soft);font-size:1.1rem;margin-top:.8rem}
-  .hero-arrow{
-    position:absolute;right:8%;top:9rem;width:120px;opacity:.9;
-    transform:rotate(12deg);
-  }
-  @media(max-width:900px){.hero-arrow{display:none}}
-
-  /* ---------- Polaroid à la une ---------- */
-  .featured-zone{margin-top:4rem;display:grid;grid-template-columns:1.05fr 1fr;gap:3.5rem;align-items:center}
-  @media(max-width:880px){.featured-zone{grid-template-columns:1fr;gap:2.5rem}}
-  .polaroid{
-    background:#fff;padding:16px 16px 60px;
-    box-shadow:0 12px 34px rgba(30,25,15,.16);
-    transform:rotate(-2.4deg);position:relative;
-    transition:transform .25s;
-  }
-  .polaroid:hover{transform:rotate(-1deg) scale(1.015)}
-  .polaroid .ph{height:440px;background-size:cover;background-position:center;position:relative}
-  .polaroid .ph .meta{
-    position:absolute;left:12px;bottom:10px;
-    font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.08em;
-    color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.5);
-  }
-  .polaroid .caption{
-    position:absolute;left:0;right:0;bottom:14px;text-align:center;
-    font-family:'Caveat',cursive;font-weight:600;font-size:1.45rem;color:#3a3630;
-    transform:rotate(-.5deg);
-  }
-  .polaroid .tape{top:-13px;left:50%;transform:translateX(-50%) rotate(-3deg)}
-  .stamp{
-    position:absolute;right:-18px;top:-18px;width:88px;height:88px;border-radius:50%;
-    border:2.5px solid var(--accent);color:var(--accent);
-    display:flex;align-items:center;justify-content:center;text-align:center;
-    font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
-    transform:rotate(12deg);background:rgba(255,253,248,.7);
-    line-height:1.4;
-  }
-  .featured-txt .kicker{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
-  .featured-txt h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.5rem,3vw,2.1rem);line-height:1.13;letter-spacing:-.02em;margin:.7rem 0 1rem}
-  .featured-txt p{color:var(--ink-soft);margin-bottom:1rem}
-  .margin-note{
-    font-family:'Caveat',cursive;font-weight:500;font-size:1.25rem;color:var(--blue);
-    transform:rotate(-1deg);display:block;margin:.4rem 0 1rem;
-  }
-  .readmore{text-decoration:none;font-weight:600;font-size:.95rem;border-bottom:2px solid var(--accent);padding-bottom:2px}
-  .pal-row{display:flex;height:34px;margin:1.1rem 0;max-width:340px;gap:5px}
-  .pal-row button{
-    flex:1;border:none;cursor:pointer;border-radius:5px;
-    transform:rotate(var(--r,0deg));transition:transform .2s;
-    box-shadow:0 2px 5px rgba(0,0,0,.12);
-  }
-  .pal-row button:hover{transform:rotate(0deg) scale(1.12)}
-
-
-  /* ---------- extraits de vol (vidéos) ---------- */
-  .filmstrip{margin-top:3.2rem;display:grid;grid-template-columns:1fr 1fr;gap:2.4rem}
-  @media(max-width:760px){.filmstrip{grid-template-columns:1fr}}
-  .filmcard{
-    background:#fff;padding:14px 14px 52px;position:relative;
-    box-shadow:0 12px 30px rgba(30,25,15,.15);
-    transform:rotate(var(--fr,1.4deg));transition:transform .25s;
-  }
-  .filmcard:hover{transform:rotate(0deg) scale(1.012)}
-  .filmcard:first-child{--fr:-1.6deg}
-  .filmcard video{display:block;width:100%;height:auto;background:#111}
-  .filmcard .tape{top:-12px;right:26px;transform:rotate(5deg)}
-  .filmcard:first-child .tape{right:auto;left:26px;transform:rotate(-6deg)}
-  .filmcard .caption{
-    position:absolute;left:0;right:0;bottom:12px;text-align:center;
-    font-family:'Caveat',cursive;font-weight:600;font-size:1.35rem;color:#3a3630;
-  }
-  .filmcard .rec{
-    position:absolute;top:24px;left:26px;
-    font-family:'Space Mono',monospace;font-size:.64rem;letter-spacing:.12em;
-    color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.6);
-  }
-  .filmcard .rec::before{
-    content:"";display:inline-block;width:8px;height:8px;border-radius:50%;
-    background:#E4572E;margin-right:6px;vertical-align:1px;
-  }
-
-  /* ---------- Sections ---------- */
-  section{padding:4.5rem 0;position:relative}
-  .sec-title{
-    font-family:'Syne',sans-serif;font-weight:800;
-    font-size:clamp(1.7rem,3.4vw,2.3rem);letter-spacing:-.02em;
-    margin:.4rem 0 .3rem;display:inline-block;position:relative;
-  }
-  .sec-title .squiggle{position:absolute;left:0;right:0;bottom:-10px;height:10px}
-  .sec-note{font-family:'Caveat',cursive;font-weight:500;font-size:1.3rem;color:var(--ink-soft);margin:.9rem 0 2.4rem;transform:rotate(-.6deg);display:inline-block}
-
-  /* ---------- Carnets : grille irrégulière ---------- */
-  .posts{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2.2rem 1.8rem}
-  .post{
-    background:var(--card);border:1px solid var(--line);
-    overflow:visible;display:flex;flex-direction:column;position:relative;
-    box-shadow:0 8px 24px rgba(30,25,15,.09);
-    transform:rotate(var(--tilt,0deg));
-    transition:transform .22s, box-shadow .22s;
-  }
-  .post:hover{transform:rotate(0deg) translateY(-5px);box-shadow:0 16px 38px rgba(30,25,15,.14);z-index:5}
-  .post:nth-child(3n+1){--tilt:-1.3deg}
-  .post:nth-child(3n+2){--tilt:.9deg;margin-top:1.2rem}
-  .post:nth-child(3n){--tilt:-.6deg;margin-top:.5rem}
-  @media(max-width:700px){.post{margin-top:0!important}}
-  .post .tape{top:-12px;left:22px;transform:rotate(-5deg);width:74px;height:22px}
-  .post:nth-child(even) .tape{left:auto;right:22px;transform:rotate(6deg)}
-  .post .shot{height:190px;position:relative;background-size:cover;background-position:center;margin:10px 10px 0}
-  .post .shot .meta{
-    position:absolute;left:10px;bottom:8px;
-    font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.07em;
-    color:#fff;text-shadow:0 1px 5px rgba(0,0,0,.5);
-  }
-  .post .duo{display:flex;gap:6px;margin:6px 10px 0}
-  .post .duo .cell{flex:1;position:relative}
-  .post .duo video{width:100%;height:112px;object-fit:cover;display:block}
-  .post .duo .cap{
-    position:absolute;left:6px;bottom:4px;
-    font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.08em;
-    color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.6);
-  }
-  .post .body{padding:1rem 1.25rem 1.3rem;display:flex;flex-direction:column;gap:.45rem;flex:1}
-  .post h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;line-height:1.25}
-  .post .excerpt{font-size:.92rem;color:var(--ink-soft);flex:1}
-  .post .hand-note{
-    font-family:'Caveat',cursive;font-weight:500;font-size:1.2rem;color:var(--blue);
-    transform:rotate(-1deg);margin-top:.2rem;
-  }
-  .post .postmeta{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--ink-soft);margin-top:.4rem}
-  .post .mini-pal{display:flex;gap:4px;margin-top:.6rem}
-  .post .mini-pal button{
-    width:26px;height:26px;border:none;border-radius:50%;cursor:pointer;
-    box-shadow:0 2px 4px rgba(0,0,0,.15);transition:transform .15s;
-  }
-  .post .mini-pal button:hover{transform:scale(1.25)}
-
-  /* ---------- Destinations ---------- */
-  .destinations{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;text-align:center;width:100%}
-  .dest{
-    display:inline-flex;align-items:center;gap:.6rem;
-    background:var(--card);border:1.5px solid var(--ink);border-radius:999px;
-    padding:.55rem 1.2rem;text-decoration:none;font-weight:600;font-size:.92rem;
-    transition:transform .15s, background .15s, color .15s;
-  }
-  .dest:hover{transform:translateY(-2px);background:var(--ink);color:var(--paper)}
-  .dest .sw{width:12px;height:12px;border-radius:50%;flex:none}
-
-  /* ---------- À propos ---------- */
-  .about{display:grid;grid-template-columns:1.25fr 1fr;gap:3rem;align-items:start}
-  @media(max-width:800px){.about{grid-template-columns:1fr}}
-  .about p{color:var(--ink-soft);margin-bottom:1rem;max-width:36rem}
-  .about p strong{color:var(--ink)}
-  .sticky-note{
-    background:#FFF3B8;padding:1.6rem 1.5rem;position:relative;
-    transform:rotate(1.8deg);
-    box-shadow:0 10px 26px rgba(30,25,15,.13);
-    font-family:'Caveat',cursive;font-weight:500;font-size:1.35rem;line-height:1.45;color:#3a3630;
-  }
-  .sticky-note .tape{top:-12px;left:50%;transform:translateX(-50%) rotate(2deg)}
-  .sticky-note ul{list-style:none}
-  .sticky-note li{padding:.25rem 0;border-bottom:1px dashed rgba(0,0,0,.12)}
-  .sticky-note li:last-child{border:none}
-  .sticky-note li::before{content:"→ ";color:var(--accent)}
-
-
-  footer{border-top:1px solid var(--line);padding:3rem 0;text-align:center;position:relative;z-index:2}
-  .foot-small{font-size:.8rem;color:var(--ink-soft);font-family:'Space Mono',monospace}
-  .foot-hand{font-family:'Caveat',cursive;font-weight:600;font-size:1.5rem;margin-bottom:.5rem;transform:rotate(-1deg);display:inline-block}
-
-  #toast{
-    position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
-    background:var(--ink);color:var(--paper);padding:.7rem 1.2rem;border-radius:999px;
-    font-family:'Space Mono',monospace;font-size:.82rem;transition:transform .3s;z-index:99;
-  }
-  #toast.show{transform:translateX(-50%) translateY(0)}
-
-  @media(prefers-reduced-motion:reduce){
-    *{transition:none!important;animation:none!important}
-    html{scroll-behavior:auto}
-  }
-</style>
+<link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
-
+<body class="home-page">
 <nav>
   <div class="wrap nav-inner">
     <a class="logo" href="#top"><span class="dot"></span>CARNETS DE VOL</a>
@@ -276,56 +20,20 @@
     </ul>
   </div>
 </nav>
-
 <header id="top">
   <div class="wrap">
     <p class="eyebrow">Le blog de Lucas, drone, routes secondaires et réveils trop tôt</p>
     <h1>Je pars avec un <span class="strike">appareil photo</span> drone,<br>je reviens avec des <span class="hl">couleurs</span>.</h1>
     <span class="hero-hand">← et parfois avec du sable dans les hélices</span>
     <p class="lede">Ici je raconte mes voyages vus d'en haut : les vols qui se passent bien, ceux qui se passent moins bien, et les palettes que je ramène de chaque paysage. Servez-vous, c'est fait pour.</p>
-
     <svg class="hero-arrow" viewBox="0 0 120 80" fill="none" aria-hidden="true">
       <path d="M8 12 C 40 5, 80 20, 100 55" stroke="#2547D0" stroke-width="2.5" stroke-linecap="round" fill="none"/>
       <path d="M88 50 L 101 57 L 96 42" stroke="#2547D0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
     </svg>
-
-    <div class="featured-zone">
-      <!-- Photo à la une : remplacez le dégradé par background-image:url('votre-photo.jpg') -->
-      <div class="polaroid">
-        <span class="tape"></span>
-        <span class="stamp">VOL<br>Nº14<br>·CH·</span>
-        <div class="ph"><img src="media/cervin.jpeg" alt="Le Cervin" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%">
-          <span class="meta">ZERMATT · LE CERVIN · SON NUAGE À LUI</span>
-        </div>
-        <span class="caption">le Cervin et son nuage bannière</span>
-      </div>
-      <div class="featured-txt">
-        <span class="kicker">Carnet vedette · Zermatt · 16 mai</span>
-        <h2>Zermatt, jour de chance : le Cervin sans un nuage</h2>
-        <p>On m'avait dit "tu peux attendre une semaine sans le voir". Et puis le ciel s'est lavé d'un coup : la pyramide entière, nette, avec cette écharpe blanche accrochée à la pointe, le fameux nuage que le Cervin se fabrique tout seul. Les mélèzes encore verts en bas, la neige de printemps au milieu, 4 478 mètres de caillou au-dessus. On reste bête devant, c'est tout.</p>
-        <span class="margin-note">il y a aussi 58 secondes de vidéo 4K de ce moment. frissons.</span>
-        <div class="pal-row" data-palette="#212830,#586E8B,#768BA5,#CAD7E0"></div>
-        <a class="readmore" href="zermatt.html">Lire le carnet →</a>
-      </div>
-    </div>
-
-    <div class="filmstrip">
-      <div class="filmcard">
-        <span class="tape"></span>
-        <span class="rec">DJI · 16 MAI · 14:25</span>
-        <video controls muted loop playsinline preload="none" poster="media/posters/zermatt-vallee-1425.jpg" src="media/zermatt-vallee-1425.mp4"></video>
-        <span class="caption">la vallée, les mélèzes, et LUI au fond</span>
-      </div>
-      <div class="filmcard">
-        <span class="tape"></span>
-        <span class="rec">DJI · 16 MAI · 18:56</span>
-        <video controls muted loop playsinline preload="none" poster="media/posters/zermatt-soir-1856.jpg" src="media/zermatt-soir-1856.mp4"></video>
-        <span class="caption">dernière lumière avant de rentrer</span>
-      </div>
-    </div>
+    <div class="featured-zone" id="featured"></div>
+    <div class="filmstrip" id="featured-clips"></div>
   </div>
 </header>
-
 <section id="carnets">
   <div class="wrap">
     <h2 class="sec-title">Les carnets
@@ -333,11 +41,10 @@
         <path d="M0 6 Q 12 1, 25 6 T 50 6 T 75 6 T 100 6 T 125 6 T 150 6 T 175 6 T 200 6" stroke="#E4572E" stroke-width="3" fill="none" stroke-linecap="round"/>
       </svg>
     </h2>
-    <br><span class="sec-note">4 carnets, tous vécus, zéro invention. les pastilles de couleur se copient en un clic</span>
+    <br><span class="sec-note"><span data-carnet-count>4</span> carnets, tous vécus, zéro invention. les pastilles de couleur se copient en un clic</span>
     <div class="posts" id="posts"></div>
   </div>
 </section>
-
 <section id="destinations">
   <div class="wrap">
     <h2 class="sec-title">Où je suis passé
@@ -349,7 +56,6 @@
     <div class="destinations" id="dest-list"></div>
   </div>
 </section>
-
 <section id="apropos">
   <div class="wrap about">
     <div>
@@ -367,7 +73,7 @@
       <span class="tape"></span>
       Au compteur, pour de vrai :
       <ul>
-        <li>4 carnets, 4 lieux</li>
+        <li><span data-carnet-count>4</span> carnets, <span data-carnet-count>4</span> lieux</li>
         <li>8 vidéos, 3 photos</li>
         <li>16 couleurs pipettées</li>
         <li>1 nuage fabriqué par une montagne</li>
@@ -377,183 +83,15 @@
     </div>
   </div>
 </section>
-
-
 <footer>
   <div class="wrap">
     <span class="foot-hand">à bientôt là-haut</span>
     <p class="foot-small">© 2026 Lucas · Carnets de vol, écrits entre deux batteries</p>
   </div>
 </footer>
-
 <div id="toast" role="status">Copié !</div>
-
-<script>
-/* ---------- Utilitaires ---------- */
-const toast=document.getElementById('toast');
-let toastTimer;
-function notify(msg){
-  toast.textContent=msg;
-  toast.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>toast.classList.remove('show'),1600);
-}
-function copyHex(hex){
-  const done=()=>notify(hex+" copié ! (bon vol)");
-  if(navigator.clipboard){navigator.clipboard.writeText(hex).then(done).catch(done);}else{done();}
-}
-
-/* Palette de l'article à la une, pastilles légèrement de travers */
-document.querySelectorAll('.pal-row').forEach(row=>{
-  row.dataset.palette.split(',').forEach((c,i)=>{
-    const b=document.createElement('button');
-    b.style.background=c;
-    b.style.setProperty('--r',((i%2?1:-1)*(1.5+i))+'deg');
-    b.setAttribute('aria-label','Copier '+c);
-    b.title=c;
-    b.addEventListener('click',()=>copyHex(c));
-    row.appendChild(b);
-  });
-});
-
-/* ----------------------------------------------------------------------
-   CARNETS, remplacez `img:null` par img:"photos/xxx.jpg" pour vos photos
----------------------------------------------------------------------- */
-const posts=[
-  {
-    title:"La chaîne des Puys, 80 volcans en rang",
-    excerpt:"Le Sancy était déjà beau, mais alors ça : des dizaines de volcans endormis recouverts de verdure, alignés à perte de vue, pas une forêt, juste de l'herbe posée sur des cônes. Le seul endroit de France où le paysage a l'air dessiné.",
-    note:"pardon le Sancy, mais là c'est autre chose",
-    date:"17 juillet", read:"9 min",
-    url:"puys.html",
-    meta:"ALT 110 M · CHAÎNE DES PUYS · 16:32",
-    video:"media/chaine-des-puys.mp4",
-    poster:"media/posters/chaine-des-puys.jpg",
-    img:null,
-    fallback:"linear-gradient(160deg,#4A4E31 0%,#5D5E36 40%,#7B7846 70%,#53B0D6 100%)",
-    palette:["#4A4E31","#5D5E36","#7B7846","#53B0D6"]
-  },
-  {
-    title:"Annecy : le lac, les parapentes, la cascade cachée",
-    excerpt:"Vu du col, le lac est une virgule turquoise posée entre les montagnes. Un parapentiste est venu se poser pile dans mon cadre, merci à lui. Et en fin de journée, une cascade planquée dans la montagne, que le drone a trouvée avant moi.",
-    note:"le parapentiste ne saura jamais qu'il a fait la photo",
-    date:"24 mai", read:"8 min",
-    url:"annecy.html",
-    meta:"COL DE LA FORCLAZ · LAC D'ANNECY · 12:13",
-    img:"media/annecy-forclaz.jpeg",
-    clips:[
-      {src:"media/annecy-lac-1213.mp4",poster:"media/posters/annecy-lac-1213.jpg",cap:"LE LAC · 12:13"},
-      {src:"media/annecy-cascade-1350.mp4",poster:"media/posters/annecy-cascade-1350.jpg",cap:"LA CASCADE · 13:50"}
-    ],
-    fallback:null,
-    palette:["#43575E","#5276AD","#759ACC","#B4D1ED"]
-  },
-  {
-    title:"Chez moi, en campagne (oui, ça compte)",
-    excerpt:"Là où tout a commencé : les champs derrière la maison, l'étang, les arbres nus de décembre. Mon terrain d'entraînement, celui où je teste tout avant de partir loin, et qui n'a rien à envier au reste.",
-    note:"le premier décollage de tous, c'était ici",
-    date:"27 décembre", read:"5 min",
-    url:"chez-moi.html",
-    meta:"CHEZ MOI · CAMPAGNE · COUCHER À 16:37",
-    img:"media/chez-moi.jpeg",
-    clips:[
-      {src:"media/chez-moi-matin-1110.mp4",poster:"media/posters/chez-moi-matin-1110.jpg",cap:"LE MATIN · 11:10"},
-      {src:"media/chez-moi-soir-1625.mp4",poster:"media/posters/chez-moi-soir-1625.jpg",cap:"L'HEURE DORÉE · 16:25"}
-    ],
-    fallback:null,
-    palette:["#362F1C","#6E573B","#E5CEA7","#799ABF"]
-  }
-];
-
-const grid=document.getElementById('posts');
-posts.forEach(p=>{
-  const card=document.createElement('article');
-  card.className='post';
-
-  const tape=document.createElement('span');
-  tape.className='tape';
-  card.appendChild(tape);
-
-  const shot=document.createElement('div');
-  shot.className='shot';
-  if(p.video){
-    const vid=document.createElement('video');
-    vid.src=p.video;
-    vid.controls=true;vid.muted=true;vid.loop=true;vid.playsInline=true;
-    vid.preload='none';if(p.poster)vid.poster=p.poster;
-    vid.style.cssText='width:100%;height:100%;object-fit:cover;display:block';
-    shot.appendChild(vid);
-  }else if(p.img){
-    const im=document.createElement('img');
-    im.src=p.img;im.alt=p.title;
-    im.style.cssText='width:100%;height:100%;object-fit:cover;display:block';
-    shot.appendChild(im);
-  }else{
-    shot.style.background=p.fallback;
-    shot.style.backgroundSize='cover';
-    shot.style.backgroundPosition='center';
-  }
-  const meta=document.createElement('span');
-  meta.className='meta';
-  meta.textContent=p.meta;
-  shot.appendChild(meta);
-
-  const body=document.createElement('div');
-  body.className='body';
-  body.innerHTML='<h3><a href="'+(p.url||'#')+'" style="text-decoration:none">'+p.title+'</a></h3>'
-    +'<p class="excerpt">'+p.excerpt+'</p>'
-    +'<span class="hand-note">'+p.note+'</span>'
-    +'<p class="postmeta">'+p.date+' · '+p.read+'</p>'
-    +(p.url?'<a class="readmore" href="'+p.url+'" style="margin-top:.5rem">Lire le carnet →</a>':'');
-
-  const pal=document.createElement('div');
-  pal.className='mini-pal';
-  p.palette.forEach(c=>{
-    const b=document.createElement('button');
-    b.style.background=c;
-    b.setAttribute('aria-label','Copier '+c);
-    b.title=c;
-    b.addEventListener('click',()=>copyHex(c));
-    pal.appendChild(b);
-  });
-  body.appendChild(pal);
-
-  card.appendChild(shot);
-  if(p.clips){
-    const duo=document.createElement('div');
-    duo.className='duo';
-    p.clips.forEach(cl=>{
-      const cell=document.createElement('div');
-      cell.className='cell';
-      const vid=document.createElement('video');
-      vid.src=cl.src;vid.controls=true;vid.muted=true;vid.loop=true;vid.playsInline=true;
-      vid.preload='none';if(cl.poster)vid.poster=cl.poster;
-      cell.appendChild(vid);
-      const cap=document.createElement('span');
-      cap.className='cap';cap.textContent=cl.cap;
-      cell.appendChild(cap);
-      duo.appendChild(cell);
-    });
-    card.appendChild(duo);
-  }
-  card.appendChild(body);
-  grid.appendChild(card);
-});
-
-/* ---------- Destinations : étiquettes bagage ---------- */
-const destinations=[
-  ["Zermatt · le Cervin","#586E8B","zermatt.html"],
-  ["Auvergne · Sancy & chaîne des Puys","#5D5E36","puys.html"],
-  ["Annecy · le lac","#5276AD","annecy.html"],
-  ["chez moi (oui, ça compte)","#E5CEA7","chez-moi.html"]
-];
-const destBox=document.getElementById('dest-list');
-destinations.forEach(([name,color,url])=>{
-  const a=document.createElement('a');
-  a.className='dest';a.href=url;
-  a.innerHTML='<span class="sw" style="background:'+color+'"></span>'+name;
-  destBox.appendChild(a);
-});
-</script>
+<script src="assets/carnets.js" defer></script>
+<script src="assets/site.js" defer></script>
+<script src="assets/home.js" defer></script>
 </body>
 </html>

@@ -7,63 +7,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
-<style>
-  :root{--paper:#F5F3EC;--ink:#1C1B1A;--ink-soft:#6B675E;--line:#DDD8CC;--card:#FFFDF8;--accent:#E4572E;--blue:#2547D0;--maxw:820px}
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{background:var(--paper);color:var(--ink);font-family:'Instrument Sans',system-ui,sans-serif;font-size:17.5px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.03 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
-  ::selection{background:var(--ink);color:var(--paper)}
-  a{color:inherit}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;position:relative;z-index:2}
-  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
-  nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px;max-width:1120px;margin:0 auto;padding:0 24px}
-  .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;text-decoration:none;display:flex;align-items:center;gap:.5rem}
-  .logo .dot{width:13px;height:13px;border-radius:50%;background:var(--accent)}
-  .back{text-decoration:none;font-size:.9rem;font-weight:600;color:var(--ink-soft)}
-  .back:hover{color:var(--ink)}
-  header{padding:4.5rem 0 2.5rem}
-  .kicker{font-family:'Space Mono',monospace;font-size:.74rem;letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}
-  h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,5.5vw,3.3rem);line-height:1.08;letter-spacing:-.02em;margin:.8rem 0 .6rem}
-  .subtitle{font-family:'Caveat',cursive;font-weight:600;font-size:1.5rem;color:var(--blue);transform:rotate(-1deg);display:inline-block}
-  .logbook{background:var(--card);border:1px solid var(--line);box-shadow:0 8px 24px rgba(30,25,15,.08);padding:1.4rem 1.6rem;margin:2.2rem 0;transform:rotate(-.4deg);position:relative}
-  .logbook .tape{position:absolute;width:80px;height:24px;background:rgba(230,220,180,.55);box-shadow:0 1px 3px rgba(0,0,0,.08);top:-12px;left:28px;transform:rotate(-4deg)}
-  .logbook h2{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.7rem}
-  .logbook ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.2rem 2rem}
-  @media(max-width:560px){.logbook ul{grid-template-columns:1fr}}
-  .logbook li{font-size:.92rem;padding:.3rem 0;border-bottom:1px dashed var(--line)}
-  .logbook li b{font-family:'Space Mono',monospace;font-weight:400;font-size:.76rem;color:var(--ink-soft);display:block}
-  article{padding-bottom:2rem}
-  article p{margin:1.3rem 0;color:#33312C}
-  article p.big:first-letter{font-family:'Syne',sans-serif;font-weight:800;font-size:3.2em;float:left;line-height:.85;padding-right:.12em;color:var(--accent)}
-  .margin-note{font-family:'Caveat',cursive;font-weight:500;font-size:1.35rem;color:var(--blue);transform:rotate(-1deg);display:block;margin:1rem 0}
-  .polaroid{background:#fff;padding:14px 14px 54px;box-shadow:0 12px 32px rgba(30,25,15,.15);transform:rotate(-1.6deg);position:relative;margin:2.4rem 0;transition:transform .25s}
-  .polaroid:hover{transform:rotate(-.4deg)}
-  .polaroid img,.polaroid video{display:block;width:100%;height:auto}
-  .polaroid .tape{position:absolute;width:88px;height:25px;background:rgba(230,220,180,.55);box-shadow:0 1px 3px rgba(0,0,0,.08);top:-13px;left:50%;transform:translateX(-50%) rotate(-3deg)}
-  .polaroid .caption{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-family:'Caveat',cursive;font-weight:600;font-size:1.4rem;color:#3a3630}
-  .polaroid .rec{position:absolute;top:26px;left:28px;font-family:'Space Mono',monospace;font-size:.64rem;letter-spacing:.12em;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.6)}
-  .polaroid .rec::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#E4572E;margin-right:6px;vertical-align:1px}
-  .polaroid.tilt-r{transform:rotate(1.4deg)}
-  .polaroid.tilt-r:hover{transform:rotate(.3deg)}
-  .pal-section{margin:3rem 0;background:var(--card);border:1px solid var(--line);padding:1.8rem;transform:rotate(.5deg);box-shadow:0 8px 24px rgba(30,25,15,.08)}
-  .pal-section h2{font-family:'Syne',sans-serif;font-weight:700;font-size:1.2rem;margin-bottom:.4rem}
-  .pal-section .note{font-family:'Caveat',cursive;font-weight:500;font-size:1.25rem;color:var(--ink-soft);margin-bottom:1rem;display:block}
-  .swatches{display:flex;gap:8px;height:110px}
-  .swatches button{flex:1;border:none;cursor:pointer;border-radius:8px;position:relative;box-shadow:0 3px 8px rgba(0,0,0,.14);transform:rotate(var(--r,0deg));transition:transform .2s}
-  .swatches button:hover{transform:rotate(0deg) scale(1.05)}
-  .swatches button b{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);font-family:'Space Mono',monospace;font-weight:400;font-size:.66rem;color:#fff;mix-blend-mode:difference}
-  .pager{display:flex;justify-content:space-between;gap:1rem;margin:3rem 0 4rem;flex-wrap:wrap}
-  .pager a{text-decoration:none;font-weight:600;border-bottom:2px solid var(--accent);padding-bottom:2px}
-  footer{border-top:1px solid var(--line);padding:2.5rem 0;text-align:center;position:relative;z-index:2}
-  .foot-small{font-size:.78rem;color:var(--ink-soft);font-family:'Space Mono',monospace}
-  #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:var(--paper);padding:.7rem 1.2rem;border-radius:999px;font-family:'Space Mono',monospace;font-size:.82rem;transition:transform .3s;z-index:99}
-  #toast.show{transform:translateX(-50%) translateY(0)}
-  @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
-</style>
+<link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
+<body class="article-page">
 <nav><div class="nav-inner">
   <a class="logo" href="index.html"><span class="dot"></span>CARNETS DE VOL</a>
   <a class="back" href="index.html">← tous les carnets</a>
@@ -86,49 +32,37 @@
 <li><b>DERNIÈRE ÉRUPTION</b>il y a ~6 700 ans</li></ul>
 </div>
 <article>
-
 <p class="big">J'étais venu pour le puy de Sancy, et le Sancy était très bien, qu'on se le dise. Mais en remontant vers le nord, il y a eu ce moment où la chaîne des Puys s'est déroulée devant moi, et le Sancy est devenu un souvenir. Pardon, le Sancy.</p>
-
 <p>Ce qu'on voit d'en haut n'existe nulle part ailleurs en France : des dizaines de volcans endormis, alignés sur quarante kilomètres comme si quelqu'un les avait posés là exprès. Et attention : pas de forêts sombres ni de paysage lunaire. Juste de la verdure : de l'herbe et de la lande posées directement sur les cônes, qui soulignent chaque cratère, chaque pente, chaque égueulement. Le relief est nu, lisible, dessiné.</p>
-
 <div class="polaroid">
   <span class="tape"></span>
   <span class="rec">17 JUILLET · 16:32</span>
   <video controls muted loop playsinline preload="none" poster="media/posters/chaine-des-puys.jpg" src="media/chaine-des-puys.mp4"></video>
   <span class="caption">des volcans endormis, recouverts de verdure</span>
 </div>
-
 <span class="margin-note">le dernier a soufflé il y a ~6 700 ans. "endormi", donc. on ne le réveille pas.</span>
-
 <p>À 16h32, la lumière commençait à raser et chaque cône projetait son ombre sur le suivant. C'est là que l'alignement devient évident, presque graphique. On dirait une rangée de bols verts retournés sur une nappe. L'ensemble est classé au patrimoine mondial de l'UNESCO et franchement, vu du ciel, on signe des deux mains.</p>
-
 <p>Détail qui m'a eu : le silence. Pas le silence de la montagne, qui siffle toujours un peu, un silence épais, végétal, où le seul bruit était mes hélices au loin. Des géants qui dorment sous une couverture verte : je n'ai pas trouvé de meilleure description, alors je la garde.</p>
-
 <p>Et pour être juste avec le Sancy, parce qu'il l'a largement mérité, voici ce qu'il offrait vu du drone, de son côté du massif. Là où la chaîne des Puys est toute en rondeurs d'herbe, le Sancy sort les griffes : des aiguilles de dentelle volcanique, des crêtes déchiquetées, un tout autre caractère.</p>
-
 <div class="polaroid">
   <span class="tape"></span>
   <span class="rec">DJI · PHOTO · 48 MP</span>
   <img src="media/sancy-cretes.jpeg" alt="Les aiguilles rocheuses des crêtes du Sancy, pentes vertes et roche volcanique déchiquetée">
   <span class="caption">les aiguilles du Sancy, de la dentelle volcanique</span>
 </div>
-
 <div class="polaroid tilt-r">
   <span class="tape"></span>
   <span class="rec">DJI · PHOTO · 48 MP</span>
   <img src="media/sancy-station.jpeg" alt="La gare du téléphérique perchée sur la crête du Sancy, vallée verte en contrebas">
   <span class="caption">la gare du téléphérique, posée sur la crête comme un nid</span>
 </div>
-
 <div class="polaroid">
   <span class="tape"></span>
   <span class="rec">DJI · PHOTO · 48 MP</span>
   <img src="media/sancy-vallee.jpeg" alt="La vallée du Mont-Dore plongeante, moutonnements verts et sommets à l'horizon">
   <span class="caption">la vallée qui plonge, et les puys qui moutonnent tout au fond</span>
 </div>
-
 <span class="margin-note">voilà, le Sancy. on est quittes.</span>
-
 </article>
 <div class="pal-section">
   <h2>La palette du lieu</h2>
@@ -139,13 +73,6 @@
 </div>
 <footer><p class="foot-small">© 2026 Lucas · Carnets de vol, écrits entre deux batteries</p></footer>
 <div id="toast" role="status">Copié !</div>
-<script>
-const toast=document.getElementById('toast');let tt;
-function copyHex(h){const d=()=>{toast.textContent=h+" copié ! (bon vol)";toast.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('show'),1600)};
-if(navigator.clipboard){navigator.clipboard.writeText(h).then(d).catch(d)}else{d()}}
-document.querySelectorAll('.swatches').forEach(s=>{s.dataset.palette.split(',').forEach((c,i)=>{
-const b=document.createElement('button');b.style.background=c;b.style.setProperty('--r',((i%2?1:-1)*1.5)+'deg');
-b.innerHTML='<b>'+c+'</b>';b.title=c;b.setAttribute('aria-label','Copier '+c);b.addEventListener('click',()=>copyHex(c));s.appendChild(b)})});
-</script>
+<script src="assets/site.js" defer></script>
 </body>
 </html>
