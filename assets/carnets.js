@@ -1,6 +1,5 @@
 window.CARNETS = [
   {
-    slug: "zermatt",
     title: "Zermatt, jour de chance : le Cervin sans un nuage",
     excerpt: "On m'avait dit \"tu peux attendre une semaine sans le voir\". Et puis le ciel s'est lavé d'un coup : la pyramide entière, nette, avec cette écharpe blanche accrochée à la pointe, le fameux nuage que le Cervin se fabrique tout seul. Les mélèzes encore verts en bas, la neige de printemps au milieu, 4 478 mètres de caillou au-dessus. On reste bête devant, c'est tout.",
     note: "il y a aussi 58 secondes de vidéo 4K de ce moment. frissons.",
@@ -33,7 +32,6 @@ window.CARNETS = [
     ]
   },
   {
-    slug: "puys",
     title: "La chaîne des Puys, 80 volcans en rang",
     excerpt: "Le Sancy était déjà beau, mais alors ça : des dizaines de volcans endormis recouverts de verdure, alignés à perte de vue, pas une forêt, juste de l'herbe posée sur des cônes. Le seul endroit de France où le paysage a l'air dessiné.",
     note: "pardon le Sancy, mais là c'est autre chose",
@@ -43,13 +41,11 @@ window.CARNETS = [
     meta: "ALT 110 M · CHAÎNE DES PUYS · 16:32",
     video: "media/chaine-des-puys.mp4",
     poster: "media/posters/chaine-des-puys.jpg",
-    fallback: "linear-gradient(160deg,#4A4E31 0%,#5D5E36 40%,#7B7846 70%,#53B0D6 100%)",
     palette: ["#4A4E31", "#5D5E36", "#7B7846", "#53B0D6"],
     destination: "Auvergne · Sancy & chaîne des Puys",
     destinationColor: "#5D5E36"
   },
   {
-    slug: "annecy",
     title: "Annecy : le lac, les parapentes, la cascade cachée",
     excerpt: "Vu du col, le lac est une virgule turquoise posée entre les montagnes. Un parapentiste est venu se poser pile dans mon cadre, merci à lui. Et en fin de journée, une cascade planquée dans la montagne, que le drone a trouvée avant moi.",
     note: "le parapentiste ne saura jamais qu'il a fait la photo",
@@ -76,7 +72,6 @@ window.CARNETS = [
     destinationColor: "#5276AD"
   },
   {
-    slug: "chez-moi",
     title: "Chez moi, en campagne (oui, ça compte)",
     excerpt: "Là où tout a commencé : les champs derrière la maison, l'étang, les arbres nus de décembre. Mon terrain d'entraînement, celui où je teste tout avant de partir loin, et qui n'a rien à envier au reste.",
     note: "le premier décollage de tous, c'était ici",

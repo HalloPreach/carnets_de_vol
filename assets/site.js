@@ -1,108 +1,61 @@
 (() => {
   const toast = document.getElementById('toast');
-  let toastTimer;
+  let timer;
 
-  function notify(message) {
+  function message(text) {
     if (!toast) return;
-    toast.textContent = message;
+    toast.textContent = text;
     toast.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove('show'), 1600);
+    clearTimeout(timer);
+    timer = setTimeout(() => toast.classList.remove('show'), 1600);
   }
 
-  function fallbackCopy(text) {
-    const textarea = document.createElement('textarea');
-    textarea.value = text;
-    textarea.setAttribute('readonly', '');
-    textarea.style.position = 'fixed';
-    textarea.style.opacity = '0';
-    textarea.style.pointerEvents = 'none';
-    document.body.appendChild(textarea);
-    textarea.select();
-    textarea.setSelectionRange(0, textarea.value.length);
-
-    let copied = false;
-    try {
-      copied = document.execCommand('copy');
-    } finally {
-      textarea.remove();
-    }
-
-    if (!copied) {
-      throw new Error('La copie de secours a échoué.');
-    }
+  function copyOldWay(text) {
+    const area = document.createElement('textarea');
+    area.value = text;
+    area.readOnly = true;
+    area.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
+    document.body.appendChild(area);
+    area.select();
+    const copied = document.execCommand('copy');
+    area.remove();
+    if (!copied) throw new Error('copie refusée');
   }
 
-  async function copyHex(hex) {
+  async function copyColor(color) {
     try {
       if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(hex);
+        await navigator.clipboard.writeText(color);
       } else {
-        fallbackCopy(hex);
+        copyOldWay(color);
       }
-      notify(`${hex} copié ! (bon vol)`);
-      return true;
+      message(`${color} copié ! (bon vol)`);
     } catch (error) {
-      console.error('Impossible de copier la couleur :', error);
-      notify(`Impossible de copier ${hex}`);
-      return false;
+      console.warn('Copie impossible', error);
+      message(`Impossible de copier ${color}`);
     }
   }
 
-  function createPaletteButton(color, index, type) {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.style.background = color;
-    button.title = color;
-    button.setAttribute('aria-label', `Copier ${color}`);
-    button.addEventListener('click', () => copyHex(color));
+  document.querySelectorAll('[data-palette]').forEach((palette) => {
+    const colors = palette.dataset.palette.split(',').map((color) => color.trim());
+    const row = palette.classList.contains('pal-row');
+    const large = palette.classList.contains('swatches');
 
-    if (type === 'row') {
-      const direction = index % 2 ? 1 : -1;
-      button.style.setProperty('--r', `${direction * (1.5 + index)}deg`);
-    } else if (type === 'swatches') {
-      const direction = index % 2 ? 1 : -1;
-      button.style.setProperty('--r', `${direction * 1.5}deg`);
-      const label = document.createElement('b');
-      label.textContent = color;
-      button.appendChild(label);
-    }
+    colors.forEach((color, index) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.style.background = color;
+      button.title = color;
+      button.setAttribute('aria-label', `Copier ${color}`);
 
-    return button;
-  }
+      if (row || large) {
+        const angle = (index % 2 ? 1 : -1) * (row ? 1.5 + index : 1.5);
+        button.style.setProperty('--r', `${angle}deg`);
+      }
+      if (large) button.innerHTML = `<b>${color}</b>`;
 
-  function populatePalettes(root = document) {
-    root.querySelectorAll('[data-palette]').forEach((container) => {
-      if (container.dataset.paletteReady === 'true') return;
-
-      const colors = container.dataset.palette
-        .split(',')
-        .map((color) => color.trim())
-        .filter(Boolean);
-
-      const type = container.classList.contains('pal-row')
-        ? 'row'
-        : container.classList.contains('swatches')
-          ? 'swatches'
-          : 'mini';
-
-      colors.forEach((color, index) => {
-        container.appendChild(createPaletteButton(color, index, type));
-      });
-
-      container.dataset.paletteReady = 'true';
+      button.addEventListener('click', () => copyColor(color));
+      palette.appendChild(button);
     });
-  }
-
-  window.CarnetsUI = {
-    copyHex,
-    notify,
-    populatePalettes
-  };
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => populatePalettes(document));
-  } else {
-    populatePalettes(document);
-  }
+  });
 })();
