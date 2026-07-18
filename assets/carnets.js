@@ -38,9 +38,12 @@ window.CARNETS = [
     date: "17 juillet",
     read: "9 min",
     url: "puys.html",
-    meta: "ALT 110 M · CHAÎNE DES PUYS · 16:32",
+    meta: "SANCY · VUE SUR LA VALLÉE",
+    image: "media/chaine-des-puys-panorama.jpeg",
+    imageAlt: "Vue panoramique depuis les crêtes du Sancy sur la vallée et les sommets d’Auvergne",
     video: "media/chaine-des-puys.mp4",
     poster: "media/posters/chaine-des-puys.jpg",
+    videoCaption: "CHAÎNE DES PUYS · 16:32",
     palette: ["#4A4E31", "#5D5E36", "#7B7846", "#53B0D6"],
     destination: "Auvergne · Sancy & chaîne des Puys",
     destinationColor: "#5D5E36"

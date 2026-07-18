@@ -3,8 +3,8 @@
   const featured = carnets.find((carnet) => carnet.featured);
   const others = carnets.filter((carnet) => !carnet.featured);
 
-  const video = (src, poster = '') => `
-    <video controls muted loop playsinline preload="none"${poster ? ` poster="${poster}"` : ''} src="${src}"></video>`;
+  const video = (src, poster = '', height = '') => `
+    <video controls muted loop playsinline preload="none"${poster ? ` poster="${poster}"` : ''}${height ? ` style="height:${height}"` : ''} src="${src}"></video>`;
 
   if (featured) {
     document.getElementById('featured').innerHTML = `
@@ -36,15 +36,24 @@
   }
 
   document.getElementById('posts').innerHTML = others.map((carnet) => {
-    const mainMedia = carnet.video
-      ? video(carnet.video, carnet.poster)
-      : `<img src="${carnet.image}" alt="${carnet.imageAlt || carnet.title}">`;
+    const mainMedia = carnet.image
+      ? `<img src="${carnet.image}" alt="${carnet.imageAlt || carnet.title}" loading="lazy">`
+      : video(carnet.video, carnet.poster);
 
-    const clips = carnet.clips ? `
+    const extraVideos = [
+      ...(carnet.image && carnet.video ? [{
+        src: carnet.video,
+        poster: carnet.poster,
+        caption: carnet.videoCaption || carnet.meta
+      }] : []),
+      ...(carnet.clips || [])
+    ];
+
+    const clips = extraVideos.length ? `
       <div class="duo">
-        ${carnet.clips.map((clip) => `
+        ${extraVideos.map((clip) => `
           <div class="cell">
-            ${video(clip.src, clip.poster)}
+            ${video(clip.src, clip.poster, extraVideos.length === 1 ? '180px' : '')}
             <span class="cap">${clip.caption}</span>
           </div>`).join('')}
       </div>` : '';
