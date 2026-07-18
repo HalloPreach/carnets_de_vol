@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carnets de vol - Lucas</title>
+<title>Carnets de vol, Lucas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
@@ -218,26 +218,16 @@
   }
   .post .mini-pal button:hover{transform:scale(1.25)}
 
-  /* ---------- Destinations : étiquettes bagage ---------- */
-  .destinations{display:flex;flex-wrap:wrap;gap:1rem}
+  /* ---------- Destinations ---------- */
+  .destinations{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;text-align:center;width:100%}
   .dest{
-    display:inline-flex;align-items:center;gap:.55rem;
-    background:var(--card);border:1px solid var(--line);
-    padding:.55rem 1.15rem .55rem .9rem;text-decoration:none;font-weight:600;font-size:.92rem;
-    transform:rotate(var(--dr,0deg));
-    box-shadow:0 3px 10px rgba(30,25,15,.08);
-    transition:transform .15s;position:relative;
-    clip-path:polygon(12px 0, 100% 0, 100% 100%, 12px 100%, 0 50%);
+    display:inline-flex;align-items:center;gap:.6rem;
+    background:var(--card);border:1.5px solid var(--ink);border-radius:999px;
+    padding:.55rem 1.2rem;text-decoration:none;font-weight:600;font-size:.92rem;
+    transition:transform .15s, background .15s, color .15s;
   }
-  .dest::before{
-    content:"";width:6px;height:6px;border-radius:50%;
-    background:var(--paper);border:1.5px solid var(--ink-soft);
-    position:absolute;left:7px;top:50%;transform:translateY(-50%);
-  }
-  .dest:hover{transform:rotate(0deg) translateY(-3px)}
-  .dest:nth-child(odd){--dr:-1.6deg}
-  .dest:nth-child(even){--dr:1.3deg}
-  .dest .sw{width:12px;height:12px;border-radius:50%;flex:none;margin-left:.5rem}
+  .dest:hover{transform:translateY(-2px);background:var(--ink);color:var(--paper)}
+  .dest .sw{width:12px;height:12px;border-radius:50%;flex:none}
 
   /* ---------- À propos ---------- */
   .about{display:grid;grid-template-columns:1.25fr 1fr;gap:3rem;align-items:start}
@@ -256,42 +246,6 @@
   .sticky-note li:last-child{border:none}
   .sticky-note li::before{content:"→ ";color:var(--accent)}
 
-  /* ---------- Newsletter : carte postale ---------- */
-  .postcard{
-    background:var(--card);border:1px solid var(--line);
-    box-shadow:0 12px 32px rgba(30,25,15,.12);
-    transform:rotate(-.8deg);position:relative;
-    display:grid;grid-template-columns:1.4fr 1fr;
-  }
-  @media(max-width:760px){.postcard{grid-template-columns:1fr}}
-  .postcard .left{padding:2.4rem;border-right:1.5px dashed var(--line)}
-  @media(max-width:760px){.postcard .left{border-right:none;border-bottom:1.5px dashed var(--line)}}
-  .postcard h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.4rem,2.8vw,1.9rem);letter-spacing:-.02em;margin:.4rem 0 .8rem}
-  .postcard p{color:var(--ink-soft);margin-bottom:1.4rem;max-width:28rem}
-  .newsrow{display:flex;gap:.7rem;flex-wrap:wrap}
-  .newsrow input{
-    font-family:inherit;font-size:.95rem;padding:.75rem 1.1rem;
-    border:1.5px solid var(--ink);background:var(--paper);
-    min-width:min(260px,70vw);color:var(--ink);
-  }
-  .btn{
-    display:inline-flex;align-items:center;font-weight:600;font-size:.95rem;
-    padding:.75rem 1.3rem;border:1.5px solid var(--ink);
-    background:var(--ink);color:var(--paper);cursor:pointer;font-family:inherit;
-    transition:transform .15s;
-  }
-  .btn:hover{transform:translateY(-2px)}
-  .postcard .right{
-    padding:2.4rem 2rem;display:flex;flex-direction:column;justify-content:space-between;gap:1rem;
-  }
-  .faux-stamp{
-    align-self:flex-end;width:70px;height:84px;
-    background:linear-gradient(160deg,#264E70,#4FC1C9);
-    border:6px solid #fff;outline:1px solid var(--line);
-    display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px;
-    font-family:'Space Mono',monospace;font-size:.55rem;color:#fff;letter-spacing:.1em;
-  }
-  .postcard .addr{font-family:'Caveat',cursive;font-weight:500;font-size:1.35rem;color:#3a3630;line-height:1.5;transform:rotate(-1deg)}
 
   footer{border-top:1px solid var(--line);padding:3rem 0;text-align:center;position:relative;z-index:2}
   .foot-small{font-size:.8rem;color:var(--ink-soft);font-family:'Space Mono',monospace}
@@ -319,14 +273,13 @@
       <li><a href="#carnets">Carnets</a></li>
       <li><a href="#destinations">Destinations</a></li>
       <li><a href="#apropos">C'est qui Lucas ?</a></li>
-      <li><a href="#newsletter">La carte postale</a></li>
     </ul>
   </div>
 </nav>
 
 <header id="top">
   <div class="wrap">
-    <p class="eyebrow">Le blog de Lucas - drone, routes secondaires et réveils trop tôt</p>
+    <p class="eyebrow">Le blog de Lucas, drone, routes secondaires et réveils trop tôt</p>
     <h1>Je pars avec un <span class="strike">appareil photo</span> drone,<br>je reviens avec des <span class="hl">couleurs</span>.</h1>
     <span class="hero-hand">← et parfois avec du sable dans les hélices</span>
     <p class="lede">Ici je raconte mes voyages vus d'en haut : les vols qui se passent bien, ceux qui se passent moins bien, et les palettes que je ramène de chaque paysage. Servez-vous, c'est fait pour.</p>
@@ -349,7 +302,7 @@
       <div class="featured-txt">
         <span class="kicker">Carnet vedette · Zermatt · 16 mai</span>
         <h2>Zermatt, jour de chance : le Cervin sans un nuage</h2>
-        <p>On m'avait dit "tu peux attendre une semaine sans le voir". Et puis le ciel s'est lavé d'un coup : la pyramide entière, nette, avec cette écharpe blanche accrochée à la pointe - le fameux nuage que le Cervin se fabrique tout seul. Les mélèzes encore verts en bas, la neige de printemps au milieu, 4 478 mètres de caillou au-dessus. On reste bête devant, c'est tout.</p>
+        <p>On m'avait dit "tu peux attendre une semaine sans le voir". Et puis le ciel s'est lavé d'un coup : la pyramide entière, nette, avec cette écharpe blanche accrochée à la pointe, le fameux nuage que le Cervin se fabrique tout seul. Les mélèzes encore verts en bas, la neige de printemps au milieu, 4 478 mètres de caillou au-dessus. On reste bête devant, c'est tout.</p>
         <span class="margin-note">il y a aussi 58 secondes de vidéo 4K de ce moment. frissons.</span>
         <div class="pal-row" data-palette="#212830,#586E8B,#768BA5,#CAD7E0"></div>
         <a class="readmore" href="zermatt.html">Lire le carnet →</a>
@@ -380,7 +333,7 @@
         <path d="M0 6 Q 12 1, 25 6 T 50 6 T 75 6 T 100 6 T 125 6 T 150 6 T 175 6 T 200 6" stroke="#E4572E" stroke-width="3" fill="none" stroke-linecap="round"/>
       </svg>
     </h2>
-    <br><span class="sec-note">4 carnets - tous vécus, zéro invention. les pastilles de couleur se copient en un clic</span>
+    <br><span class="sec-note">4 carnets, tous vécus, zéro invention. les pastilles de couleur se copient en un clic</span>
     <div class="posts" id="posts"></div>
   </div>
 </section>
@@ -392,8 +345,8 @@
         <path d="M0 6 Q 12 1, 25 6 T 50 6 T 75 6 T 100 6 T 125 6 T 150 6 T 175 6 T 200 6" stroke="#2547D0" stroke-width="3" fill="none" stroke-linecap="round"/>
       </svg>
     </h2>
-    <br><span class="sec-note">chaque étiquette porte la couleur dominante du lieu (véridique)</span>
-    <div class="destinations" id="destinations"></div>
+    <br><span class="sec-note">chaque destination porte la couleur dominante du lieu, cliquez pour ouvrir le carnet</span>
+    <div class="destinations" id="dest-list"></div>
   </div>
 </section>
 
@@ -405,10 +358,10 @@
           <path d="M0 6 Q 12 1, 25 6 T 50 6 T 75 6 T 100 6 T 125 6 T 150 6 T 175 6 T 200 6" stroke="#E4572E" stroke-width="3" fill="none" stroke-linecap="round"/>
         </svg>
       </h2>
-      <p style="margin-top:1.6rem">Salut, moi c'est Lucas. Je fais du drone, des prises de vues et des photos. Tout a commencé dans les champs derrière chez moi, un 27 décembre, avec un premier vol de six secondes - depuis, le drone part dans le sac à chaque voyage.</p>
-      <p>Chaque carnet de ce blog est fait de la même matière : les vidéos et les photos que je rapporte, l'heure exacte des vols, et la palette du paysage - des couleurs pipettées directement dans mes images, pas choisies dans un nuancier.</p>
+      <p style="margin-top:1.6rem">Salut, moi c'est Lucas. Je fais du drone, des prises de vues et des photos. Tout a commencé dans les champs derrière chez moi, un 27 décembre, avec un premier vol de six secondes. Depuis, le drone part dans le sac à chaque voyage.</p>
+      <p>Chaque carnet de ce blog est fait de la même matière : les vidéos et les photos que je rapporte, l'heure exacte des vols, et la palette du paysage, des couleurs pipettées directement dans mes images, pas choisies dans un nuancier.</p>
       <p>Ces palettes sont à vous. Copiez les codes, utilisez-les dans vos projets. C'est ma façon de partager le voyage avec ceux qui restent au sol.</p>
-      <p style="font-size:.9rem">PS : je vole toujours dans les règles - zones autorisées, altitudes respectées. Le ciel se partage.</p>
+      <p style="font-size:.9rem">PS : je vole toujours dans les règles, zones autorisées, altitudes respectées. Le ciel se partage.</p>
     </div>
     <div class="sticky-note">
       <span class="tape"></span>
@@ -425,30 +378,11 @@
   </div>
 </section>
 
-<section id="newsletter">
-  <div class="wrap">
-    <div class="postcard">
-      <div class="left">
-        <p class="eyebrow">Une carte postale numérique, une fois par mois</p>
-        <h2>Je vous écris du prochain voyage ?</h2>
-        <p>Le récit, deux-trois photos que je ne poste nulle part ailleurs, et la palette du paysage. Pas de spam - je n'aurais pas le temps d'en écrire de toute façon.</p>
-        <div class="newsrow">
-          <input type="email" placeholder="votre@email.fr" aria-label="Votre adresse email">
-          <button class="btn" onclick="subscribe()">Je m'abonne</button>
-        </div>
-      </div>
-      <div class="right">
-        <div class="faux-stamp">PAR AVION</div>
-        <p class="addr">À vous,<br>quelque part au sol,<br>en attendant la prochaine<br>fenêtre météo ✈</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <footer>
   <div class="wrap">
-    <span class="foot-hand">à bientôt là-haut -</span>
-    <p class="foot-small">© 2026 Lucas · Carnets de vol - écrits entre deux batteries</p>
+    <span class="foot-hand">à bientôt là-haut</span>
+    <p class="foot-small">© 2026 Lucas · Carnets de vol, écrits entre deux batteries</p>
   </div>
 </footer>
 
@@ -468,11 +402,6 @@ function copyHex(hex){
   const done=()=>notify(hex+" copié ! (bon vol)");
   if(navigator.clipboard){navigator.clipboard.writeText(hex).then(done).catch(done);}else{done();}
 }
-function subscribe(){
-  const input=document.querySelector('.newsrow input');
-  if(input.value.includes('@')){notify("Reçu 5/5 - à bientôt ✈");input.value='';}
-  else{notify("Hmm, cet email a l'air bizarre");}
-}
 
 /* Palette de l'article à la une, pastilles légèrement de travers */
 document.querySelectorAll('.pal-row').forEach(row=>{
@@ -488,14 +417,14 @@ document.querySelectorAll('.pal-row').forEach(row=>{
 });
 
 /* ----------------------------------------------------------------------
-   CARNETS - remplacez `img:null` par img:"photos/xxx.jpg" pour vos photos
+   CARNETS, remplacez `img:null` par img:"photos/xxx.jpg" pour vos photos
 ---------------------------------------------------------------------- */
 const posts=[
   {
     title:"La chaîne des Puys, 80 volcans en rang",
-    excerpt:"Le Sancy était déjà beau, mais alors ça : des dizaines de volcans endormis recouverts de verdure, alignés à perte de vue - pas une forêt, juste de l'herbe posée sur des cônes. Le seul endroit de France où le paysage a l'air dessiné.",
+    excerpt:"Le Sancy était déjà beau, mais alors ça : des dizaines de volcans endormis recouverts de verdure, alignés à perte de vue, pas une forêt, juste de l'herbe posée sur des cônes. Le seul endroit de France où le paysage a l'air dessiné.",
     note:"pardon le Sancy, mais là c'est autre chose",
-    date:"17 juillet", read:"7 min",
+    date:"17 juillet", read:"9 min",
     url:"puys.html",
     meta:"ALT 110 M · CHAÎNE DES PUYS · 16:32",
     video:"media/chaine-des-puys.mp4",
@@ -506,7 +435,7 @@ const posts=[
   },
   {
     title:"Annecy : le lac, les parapentes, la cascade cachée",
-    excerpt:"Vu du col, le lac est une virgule turquoise posée entre les montagnes. Un parapentiste est venu se poser pile dans mon cadre - merci à lui. Et en fin de journée, une cascade planquée dans la montagne, que le drone a trouvée avant moi.",
+    excerpt:"Vu du col, le lac est une virgule turquoise posée entre les montagnes. Un parapentiste est venu se poser pile dans mon cadre, merci à lui. Et en fin de journée, une cascade planquée dans la montagne, que le drone a trouvée avant moi.",
     note:"le parapentiste ne saura jamais qu'il a fait la photo",
     date:"24 mai", read:"8 min",
     url:"annecy.html",
@@ -521,7 +450,7 @@ const posts=[
   },
   {
     title:"Chez moi, en campagne (oui, ça compte)",
-    excerpt:"Là où tout a commencé : les champs derrière la maison, l'étang, les arbres nus de décembre. Mon terrain d'entraînement, celui où je teste tout avant de partir loin - et qui n'a rien à envier au reste.",
+    excerpt:"Là où tout a commencé : les champs derrière la maison, l'étang, les arbres nus de décembre. Mon terrain d'entraînement, celui où je teste tout avant de partir loin, et qui n'a rien à envier au reste.",
     note:"le premier décollage de tous, c'était ici",
     date:"27 décembre", read:"5 min",
     url:"chez-moi.html",
@@ -613,14 +542,16 @@ posts.forEach(p=>{
 
 /* ---------- Destinations : étiquettes bagage ---------- */
 const destinations=[
-  ["Zermatt · le Cervin","#586E8B"],["Auvergne · chaîne des Puys","#5D5E36"],
-  ["Annecy · le lac","#5276AD"],["chez moi (oui, ça compte)","#E5CEA7"]
+  ["Zermatt · le Cervin","#586E8B","zermatt.html"],
+  ["Auvergne · Sancy & chaîne des Puys","#5D5E36","puys.html"],
+  ["Annecy · le lac","#5276AD","annecy.html"],
+  ["chez moi (oui, ça compte)","#E5CEA7","chez-moi.html"]
 ];
-const destBox=document.getElementById('destinations');
-destinations.forEach(([name,color])=>{
+const destBox=document.getElementById('dest-list');
+destinations.forEach(([name,color,url])=>{
   const a=document.createElement('a');
-  a.className='dest';a.href='#carnets';
-  a.innerHTML=name+'<span class="sw" style="background:'+color+'"></span>';
+  a.className='dest';a.href=url;
+  a.innerHTML='<span class="sw" style="background:'+color+'"></span>'+name;
   destBox.appendChild(a);
 });
 </script>
